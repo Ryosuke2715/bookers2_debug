@@ -9,7 +9,7 @@ class BooksController < ApplicationController
     @book = Book.new
     @books = Book.all
   end
-  
+
 
   def create
     @book = Book.new(book_params)
@@ -46,10 +46,10 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :body)
   end
-  
+
   def is_matching_login_user
-    user = Book.find(params[:id])
-    unless user.id == current_user.id
+    book = Book.find(params[:id])
+    unless book.user.id == current_user.id
       redirect_to books_path
     end
   end
